@@ -1,0 +1,65 @@
+2023-10-30 21:02:50,505 - TeleBot - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: can't parse entities: Character '!' is reserved and must be escaped with the preceding '\'
+2023-10-30 21:02:50,507 - TeleBot - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\__init__.py", line 1074, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\util.py", line 147, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\__init__.py", line 6801, in _run_middlewares_and_handler
+    result = handler['function'](message)
+  File "C:\Users\levic\OneDrive\Área de Trabalho\pituchobot\pituchobot.py", line 152, in felicidade
+    bot.reply_to(message, resposta, parse_mode="MarkdownV2")
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\__init__.py", line 4528, in reply_to
+    return self.send_message(message.chat.id, text, reply_to_message_id=message.message_id, **kwargs)
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\__init__.py", line 1549, in send_message
+    apihelper.send_message(
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\apihelper.py", line 264, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\apihelper.py", line 162, in _make_request
+    json_result = _check_result(method_name, result)
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\apihelper.py", line 189, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: can't parse entities: Character '!' is reserved and must be escaped with the preceding '\'
+
+2023-10-30 21:05:28,497 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 75%
+2023-10-30 21:05:35,042 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 75%
+2023-10-30 21:07:03,560 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 22%
+2023-10-30 21:07:07,081 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 55%
+2023-10-30 21:08:47,783 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 52%
+2023-10-30 21:10:04,119 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 40%
+2023-10-30 21:10:07,185 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 94%
+2023-10-30 21:10:40,056 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 57%
+2023-10-30 21:10:56,525 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 26%
+2023-10-30 21:10:58,236 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 87%
+2023-10-30 21:10:59,511 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 86%
+2023-10-30 21:11:00,669 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 85%
+2023-10-30 21:11:02,072 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 32%
+2023-10-30 21:11:05,337 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 10%
+2023-10-30 21:11:07,444 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 65%
+2023-10-30 21:13:52,526 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 15%
+2023-10-30 21:13:56,362 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 38%
+2023-10-30 21:13:58,336 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 58%
+2023-10-30 21:14:02,950 - root - INFO - Usuário leviobrabo solicitou nível de felicidade: 25%
+2023-10-30 22:30:42,675 - TeleBot - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 502. Description: Bad Gateway
+2023-10-30 22:30:42,679 - TeleBot - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\util.py", line 108, in raise_exceptions
+    raise self.exception_info
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\util.py", line 90, in run
+    task(*args, **kwargs)
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\apihelper.py", line 162, in _make_request
+    json_result = _check_result(method_name, result)
+  File "C:\Users\levic\AppData\Local\Programs\Python\Python310\lib\site-packages\telebot\apihelper.py", line 189, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 502. Description: Bad Gateway
+
