@@ -171,24 +171,25 @@ def add_group_to_db(message):
 def search_group(chat_id):
     return db.groups.find_one({"chat_id": chat_id})
 
+bot_groups = []  
 # Manipulador para quando o bot é adicionado a um novo grupo
 @bot.my_chat_member_handler()
 def my_chat_m(message: types.ChatMemberUpdated):
-    chat_id = message.chat.id
-    title = message.chat.title
-    user = message.new_chat_member
-    is_bot = user.is_bot
+    if isinstance(message, types.ChatMemberUpdated):
+        chat_id = message.chat.id
+        title = message.chat.title
+        user = message.new_chat_member
 
-    if is_bot and user.id == bot.get_me().id:
-        # O bot foi adicionado ao grupo
-        if chat_id not in bot_groups:
-            # Se o bot não estiver no grupo, adicione-o ao banco de dados e à lista de grupos
-            add_group_to_db(message)
-            bot_groups.append(chat_id)
-            bot.send_message(GROUP_LOG, f"<b>#{NAME_BOT} #NEW_GROUP</b>\n<b>Name:</b> {title}\n<b>ID:</b> <code>{chat_id}</code>")
-            bot.send_message(chat_id, "Obrigado por me colocar no grupo")
-        else:
-            print('já estava no grupo')
+        if user and user.is_bot and user.id == bot.get_me().id:
+            # O bot foi adicionado ou deixou o grupo
+            if chat_id not in bot_groups:
+                # Se o bot não estiver no grupo, adicione-o ao banco de dados e à lista de grupos
+                add_group_to_db(message)
+                bot_groups.append(chat_id)
+                bot.send_message(GROUP_LOG, f"<b>#{NAME_BOT} #NEW_GROUP</b>\n<b>Name:</b> {title}\n<b>ID:</b> <code>{chat_id}</code>")
+                bot.send_message(chat_id, "Obrigado por me colocar no grupo")
+            else:
+                print('já estava no grupo')
     
 # COMANDOS SUDO
 
