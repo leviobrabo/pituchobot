@@ -294,6 +294,18 @@ def send_new_group_message(chat):
         disable_web_page_preview=True,
     )
 
+@bot.message_handler(func=lambda message: True)
+def handle_message(message):
+    chat_id = message.chat.id
+    chat_name = message.chat.title  # Nome do grupo/supergrupo
+
+    # Verifica se o tipo de chat é grupo ou supergrupo
+    if message.chat.type in ('group', 'supergroup'):
+        existing_chat = search_group(chat_id)
+        if not existing_chat:
+            add_group_to_db(chat_id, chat_name)
+            print(f"Adicionou o chat {chat_name} ao banco de dados.")
+
 
 @bot.my_chat_member_handler()
 def send_group_greeting(message: types.ChatMemberUpdated):
