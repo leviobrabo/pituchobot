@@ -3206,17 +3206,18 @@ def sigma(message):
         )
 
     mensagem = f'Seu nível Sigma é {nivelSigma} 🗿🍷'
-    mensagem_com_gif = f'{mensagem}\n{gifSigma}'
+    mensagem_com_gif = f'{mensagem}'
 
     try:
 
-        bot.send_message(
+        bot.send_animation(
             message.chat.id,
-            mensagem_com_gif,
+            gifSigma,
+            caption=mensagem,
             reply_to_message_id=message.message_id,
         )
     except Exception as e:
-        bot.send_message(message.chat.id, mensagem_com_gif)
+        bot.send_animation(message.chat.id, gifSigma, mensagem_com_gif)
 
 
 print('Bot iniciando ...')
