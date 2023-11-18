@@ -3,7 +3,7 @@ import telebot
 import configparser
 import logging
 from html import escape
-from telebot import types
+from telebot import types, util
 import random
 
 from pymongo import ASCENDING, MongoClient
@@ -3229,4 +3229,4 @@ def sigma(message):
 
 
 print('Bot iniciando ...')
-bot.polling()
+bot.infinity_polling(allowed_updates=util.update_types, skip_pending=True)
