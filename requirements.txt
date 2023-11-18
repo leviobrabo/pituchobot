@@ -1,2 +1,2 @@
-pymongo
-telebot
+pyTelegramBotAPI==4.11.0
+pymongo==4.6.0

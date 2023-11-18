@@ -63,3 +63,6 @@ Traceback (most recent call last):
     raise ApiTelegramException(method_name, result, result_json)
 telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 502. Description: Bad Gateway
 
+2023-11-18 00:27:09,364 - TeleBot - ERROR - Infinity polling: polling exited
+2023-11-18 00:27:09,366 - TeleBot - ERROR - Break infinity polling
+2023-11-18 00:28:11,740 - root - INFO - O bot foi adicionado no grupo Hist - (-1002015104891)

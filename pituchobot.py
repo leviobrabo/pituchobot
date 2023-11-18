@@ -1,12 +1,13 @@
 import datetime
-import telebot
-import configparser
 import logging
+import configparser
 from html import escape
-from telebot import types, util
 import random
+import datetime
 
 from pymongo import ASCENDING, MongoClient
+import telebot
+from telebot import types, util
 
 # Configuração do logging
 logging.basicConfig(
@@ -26,8 +27,9 @@ USERNAME_BOT = config['PITUCHOBOT']['BOT_USERNAME']
 OWNER = int(config['PITUCHOBOT']['OWNER_ID'])
 
 
-client = MongoClient(f'{MONGO_CON}')
-db = client['series_bot']
+client = MongoClient(MONGO_CON)
+db = client['pitucho_bot']
+
 
 bot = telebot.TeleBot(TOKEN, parse_mode='HTML')
 
@@ -261,7 +263,6 @@ def sudo(user_id):
 
 
 def add_group_to_db(chat_id, chat_name):
-
     return db.chats.insert_one(
         {'chat_id': chat_id, 'chat_name': chat_name, 'chat_banned': 'false'}
     )
@@ -293,19 +294,6 @@ def send_new_group_message(chat):
         parse_mode='html',
         disable_web_page_preview=True,
     )
-
-@bot.message_handler(func=lambda message: True)
-def handle_message(message):
-    chat_id = message.chat.id
-    chat_name = message.chat.title  # Nome do grupo/supergrupo
-
-    # Verifica se o tipo de chat é grupo ou supergrupo
-    if message.chat.type in ('group', 'supergroup'):
-        existing_chat = search_group(chat_id)
-        if not existing_chat:
-            add_group_to_db(chat_id, chat_name)
-            print(f"Adicionou o chat {chat_name} ao banco de dados.")
-
 
 @bot.my_chat_member_handler()
 def send_group_greeting(message: types.ChatMemberUpdated):
@@ -639,30 +627,32 @@ def ban_group(message):
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    if message.chat.type != 'private':
-        return
+    try:
+        if message.chat.type != 'private':
+            return
 
-    first_name = message.from_user.first_name
+        first_name = message.from_user.first_name
 
-    text_start = f'Olá, {first_name}!\n\nEu sou o <b>{NAME_BOT}</b>. Sou um bot para animar seu dia e grupo, consigo adivinhar seus sentimentos, time, presidente e ator preferido...\n\nSinta-se à vontade para me adicionar aos seus grupos.'
+        text_start = f'Olá, {first_name}!\n\nEu sou o <b>{NAME_BOT}</b>. Sou um bot para animar seu dia e grupo, consigo adivinhar seus sentimentos, time, presidente e ator preferido...\n\nSinta-se à vontade para me adicionar aos seus grupos.'
 
-    markup = types.InlineKeyboardMarkup(row_width=2)
-    add_to_group_button = types.InlineKeyboardButton(
-        '✨ Adicione-me ao seu grupo',
-        url=f'https://t.me/{USERNAME_BOT}?startgroup=true',
-    )
-    commands_button = types.InlineKeyboardButton(
-        '🗃 Lista de Comandos', callback_data='commands'
-    )
-    info_button = types.InlineKeyboardButton(
-        '❓ Informações', callback_data='info'
-    )
+        markup = types.InlineKeyboardMarkup()
+        add_to_group_button = types.InlineKeyboardButton(
+            '✨ Adicione-me ao seu grupo',
+            url=f'https://t.me/{USERNAME_BOT}?startgroup=true',
+        )
+        commands_button = types.InlineKeyboardButton(
+            '🗃 Lista de Comandos', callback_data='commands'
+        )
+        info_button = types.InlineKeyboardButton(
+            '❓ Informações', callback_data='info'
+        )
 
-    markup.add(add_to_group_button)
-    markup.row(commands_button, info_button)
+        markup.add(add_to_group_button)
+        markup.add(commands_button, info_button)
 
-    bot.send_message(message.chat.id, text_start, reply_markup=markup)
-
+        bot.send_message(message.chat.id, text_start, reply_markup=markup)
+    except Exception as e:
+        logging.error('erro: ') 
 
 @bot.callback_query_handler(
     func=lambda call: call.message.chat.type == 'private'
@@ -857,6 +847,7 @@ def felicidade(message):
         logging.info(
             f'Usuário {message.from_user.username} solicitou nível de felicidade, mas a mensagem original foi apagada: {felicidade}%'
         )
+
 
 
 # raiva
