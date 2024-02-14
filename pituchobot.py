@@ -293,6 +293,7 @@ def send_new_group_message(chat):
         f'<b>Link:</b> {chatusername}',
         parse_mode='html',
         disable_web_page_preview=True,
+        message_thread_id=38581,
     )
 
 @bot.my_chat_member_handler()
@@ -390,6 +391,7 @@ def sudo_command(message):
                             bot.send_message(
                                 GROUP_LOG,
                                 f"<b>#{NAME_BOT} #New_sudo</b>\n<b>ID:</b> <code>{user_id}</code>\n<b>Name:</b> {updated_user.get('name')}\nU<b>sername:</b> {username}",
+                                message_thread_id=38581,
                             )
                     else:
                         bot.send_message(
@@ -436,6 +438,7 @@ def unsudo_command(message):
                             bot.send_message(
                                 GROUP_LOG,
                                 f"<b>#{NAME_BOT} #Rem_sudo</b>\n<b>ID:</b> <code>{user_id}</code>\n<b>Nome:</b> {updated_user.get('name')}\n<b>Username:</b> {username}",
+                                message_thread_id=38581,
                             )
                     else:
                         bot.send_message(
@@ -495,6 +498,7 @@ def ban_command(message):
                                 bot.send_message(
                                     GROUP_LOG,
                                     f"<b>#{NAME_BOT} #user_banned</b>\n<b>ID:</b> <code>{user_id}</code>\n<b>Nome:</b> {updated_user.get('name')}\n<b>Username: {username}",
+                                    message_thread_id=38581,
                                 )
                             else:
                                 bot.send_message(
@@ -558,6 +562,7 @@ def unban_command(message):
                                 bot.send_message(
                                     GROUP_LOG,
                                     f"<b>#{NAME_BOT} #User_unbanned</b>\n<b>ID:</b> <code>{user_id}</code>\n<b>Nome:</b> {updated_user.get('name')}\n<b>Username:</b> {username}",
+                                    message_thread_id=38581,
                                 )
                             else:
                                 bot.send_message(
